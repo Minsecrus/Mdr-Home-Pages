@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDR | Monochrome Impression</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        #cursor.hovered {
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            mix-blend-mode: difference;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white selection:bg-white selection:text-black antialiased">
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
+        <div class="text-xl font-bold tracking-widest hoverable">MDR.</div>
+        <ul class="hidden md:flex space-x-12 text-sm tracking-widest">
+            <li><a href="#about" class="hoverable hover:line-through decoration-white decoration-1">ABOUT</a></li>
+            <li><a href="#hobbies" class="hoverable hover:line-through decoration-white decoration-1">INTERESTS</a></li>
+            <li><a href="#contact" class="hoverable hover:line-through decoration-white decoration-1">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="h-screen w-full flex flex-col justify-center items-center relative px-4">
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <div class="w-[60vw] h-[60vw] border border-white rounded-full animate-[spin_20s_linear_infinite]"></div>
+            <div
+                class="w-[40vw] h-[40vw] border border-white rounded-full absolute animate-[spin_15s_linear_infinite_reverse]">
+            </div>
+        </div>
+
+        <h1 class="text-[15vw] leading-none font-bold serif mix-blend-difference hoverable reveal">MDR</h1>
+        <p class="text-lg md:text-2xl tracking-[0.5em] mt-4 font-light uppercase reveal delay-200">Impressionist</p>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal delay-500">
+            <span class="text-xs tracking-widest">SCROLL</span>
+            <div class="w-[1px] h-16 bg-white"></div>
+        </div>
+    </header>
+
+    <!-- Moving Text Banner -->
+    <div class="w-full border-y border-white/20 py-4 mb-20 overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content text-4xl md:text-6xl serif italic opacity-50">
+                Art &nbsp;•&nbsp; Code &nbsp;•&nbsp; Life &nbsp;•&nbsp; Photography &nbsp;•&nbsp; Reading &nbsp;•&nbsp;
+                Minimalist &nbsp;•&nbsp; Design &nbsp;•&nbsp;
+                Art &nbsp;•&nbsp; Code &nbsp;•&nbsp; Life &nbsp;•&nbsp; Photography &nbsp;•&nbsp; Reading &nbsp;•&nbsp;
+                Minimalist &nbsp;•&nbsp; Design &nbsp;•&nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-[60vh] container mx-auto px-6 md:px-20 flex flex-col justify-center py-20">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+            <div class="md:col-span-4 text-gray-400 text-sm tracking-widest uppercase reveal">
+                (01) &nbsp; Introduction
+            </div>
+            <div class="md:col-span-8 reveal">
+                <p class="text-3xl md:text-5xl leading-tight serif font-light mb-8">
+                    "I exist in the contrast between <span class="italic border-b border-white pb-1">black and
+                        white</span>."
+                </p>
+                <p class="text-lg md:text-xl font-light text-gray-300 leading-relaxed max-w-2xl">
+                    我叫 MDR。在这个喧嚣的世界里，我是一个寻找宁静与秩序的观察者。我不仅是创造者，也是记录者。我喜欢极简主义的哲学，相信少即是多，相信留白的力量。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="min-h-screen container mx-auto px-6 md:px-20 py-20">
+        <div class="border-b border-white/20 pb-6 mb-12 flex justify-between items-end reveal">
+            <span class="text-gray-400 text-sm tracking-widest uppercase">(02) &nbsp; Selected Interests</span>
+            <span class="italic serif text-xl">Curated Hobbies</span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-0 border-t border-white/20">
+
+            <!-- Hobby 1: Reading -->
+            <div
+                class="group border-b border-white/20 py-12 md:py-20 hover:bg-white hover:text-black transition-colors duration-500 ease-in-out relative overflow-hidden hoverable hobby-card">
+                <div class="flex flex-col md:flex-row justify-between md:items-center relative z-10 px-4 md:px-8">
+                    <h3
+                        class="text-4xl md:text-7xl serif italic group-hover:translate-x-4 transition-transform duration-500">
+                        Reading</h3>
+                    <p class="mt-4 md:mt-0 text-sm md:text-lg tracking-widest opacity-60 group-hover:opacity-100">读书 /
+                        SOUL SEARCHING</p>
+                </div>
+                <div
+                    class="mt-8 md:hidden md:group-hover:block px-4 md:px-8 max-w-xl text-sm md:text-base opacity-80 transition-all duration-500">
+                    <p>沉浸在文字构建的迷宫中。无论是哲学思辨还是文学虚构，书本是我与这个世界保持距离又紧密相连的桥梁。最近在读《追忆似水年华》。</p>
+                </div>
+            </div>
+
+            <!-- Hobby 2: Photography -->
+            <div
+                class="group border-b border-white/20 py-12 md:py-20 hover:bg-white hover:text-black transition-colors duration-500 ease-in-out relative overflow-hidden hoverable hobby-card">
+                <div class="flex flex-col md:flex-row justify-between md:items-center relative z-10 px-4 md:px-8">
+                    <h3
+                        class="text-4xl md:text-7xl serif italic group-hover:translate-x-4 transition-transform duration-500">
+                        Photography</h3>
+                    <p class="mt-4 md:mt-0 text-sm md:text-lg tracking-widest opacity-60 group-hover:opacity-100">摄影 /
+                        LIGHT & SHADOW</p>
+                </div>
+                <div
+                    class="mt-8 md:hidden md:group-hover:block px-4 md:px-8 max-w-xl text-sm md:text-base opacity-80 transition-all duration-500">
+                    <p>用镜头捕捉光影流转的瞬间。偏爱黑白胶片质感，喜欢拍摄城市的几何线条和街头行人的瞬间情绪。摄影是时间的切片。</p>
+                </div>
+            </div>
+
+            <!-- Hobby 3: Coding -->
+            <div
+                class="group border-b border-white/20 py-12 md:py-20 hover:bg-white hover:text-black transition-colors duration-500 ease-in-out relative overflow-hidden hoverable hobby-card">
+                <div class="flex flex-col md:flex-row justify-between md:items-center relative z-10 px-4 md:px-8">
+                    <h3
+                        class="text-4xl md:text-7xl serif italic group-hover:translate-x-4 transition-transform duration-500">
+                        Coding</h3>
+                    <p class="mt-4 md:mt-0 text-sm md:text-lg tracking-widest opacity-60 group-hover:opacity-100">代码 /
+                        LOGIC & ART</p>
+                </div>
+                <div
+                    class="mt-8 md:hidden md:group-hover:block px-4 md:px-8 max-w-xl text-sm md:text-base opacity-80 transition-all duration-500">
+                    <p>在0和1的世界里构建秩序。代码不仅是工具，更是一种现代的诗歌。热衷于前端交互设计与生成式艺术。</p>
+                </div>
+            </div>
+
+            <!-- Hobby 4: Music -->
+            <div
+                class="group border-b border-white/20 py-12 md:py-20 hover:bg-white hover:text-black transition-colors duration-500 ease-in-out relative overflow-hidden hoverable hobby-card">
+                <div class="flex flex-col md:flex-row justify-between md:items-center relative z-10 px-4 md:px-8">
+                    <h3
+                        class="text-4xl md:text-7xl serif italic group-hover:translate-x-4 transition-transform duration-500">
+                        Music</h3>
+                    <p class="mt-4 md:mt-0 text-sm md:text-lg tracking-widest opacity-60 group-hover:opacity-100">音乐 /
+                        RHYTHM</p>
+                </div>
+                <div
+                    class="mt-8 md:hidden md:group-hover:block px-4 md:px-8 max-w-xl text-sm md:text-base opacity-80 transition-all duration-500">
+                    <p>Post-Rock 与 Ambient 爱好。喜欢在深夜戴上耳机，让音符填满思维的空隙。音乐是情感的容器。</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gallery / Quote Section -->
+    <section class="py-20 bg-white text-black">
+        <div class="container mx-auto px-6 md:px-20 text-center">
+            <div class="w-full h-[400px] bg-black mb-12 relative overflow-hidden group hoverable">
+                <!-- Abstract CSS Art -->
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border-[20px] border-white rounded-full group-hover:scale-150 transition-transform duration-700">
+                </div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white rounded-full mix-blend-exclusion group-hover:scale-50 transition-transform duration-700 delay-100">
+                </div>
+            </div>
+            <blockquote class="text-2xl md:text-4xl serif italic max-w-3xl mx-auto reveal text-black">
+                "Art is not what you see, but what you make others see."
+            </blockquote>
+            <cite class="block mt-4 text-sm tracking-widest uppercase text-gray-500 reveal">— Edgar Degas</cite>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact"
+        class="py-20 px-6 md:px-20 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+        <div class="reveal">
+            <h2 class="text-6xl md:text-8xl font-bold serif mb-4">Let's<br>Talk.</h2>
+            <a href="mailto:hello@mdr.com"
+                class="text-xl border-b border-white pb-1 hover:text-gray-300 transition-colors hoverable">hello@mdr.com</a>
+        </div>
+
+        <div class="flex flex-col gap-4 text-right w-full md:w-auto reveal delay-200">
+            <div class="flex gap-6 justify-end">
+                <a href="#" class="hover:underline hoverable">Twitter</a>
+                <a href="#" class="hover:underline hoverable">Instagram</a>
+                <a href="#" class="hover:underline hoverable">Github</a>
+            </div>
+            <p class="text-gray-500 text-sm">© 2023 MDR. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const hoverables = document.querySelectorAll('.hoverable');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered');
+            });
+        });
+
+        // Scroll Reveal Logic
+        const reveals = document.querySelectorAll('.reveal');
+
+        function checkReveal() {
+            const triggerBottom = window.innerHeight * 0.85;
+
+            reveals.forEach(reveal => {
+                const boxTop = reveal.getBoundingClientRect().top;
+                if (boxTop < triggerBottom) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkReveal);
+        // Trigger once on load
+        checkReveal();
+    </script>
+</body>
+
+</html>
